@@ -4,12 +4,13 @@ const EditItem = ({item}) => {
     const [item_name, setItemName] = useState(item.item_name);
     const [description, setDescription] = useState(item.description);
     const [amount, setAmount] = useState(item.amount);
+    const [location, setLocation] = useState(item.location);
 
     //edit item
     const updateItem = async(e) => {
         e.preventDefault();
         try {
-            const body = {item_name, description, amount};
+            const body = {item_name, description, amount, location};
             const response = await fetch(`http://localhost:5000/inventory/${item.id}`, {
                 method: "PUT",
                 headers: {"Content-Type": "application/json"},
@@ -42,9 +43,17 @@ const EditItem = ({item}) => {
 
 
                         <div class="modal-body">
+                            <p className="text-left">Item Name</p>
                             <input type="text" className="form-control" value={item_name} onChange={e => setItemName(e.target.value)} />
+
+                            <p className="text-left mt-4">Description</p>
                             <input type="text" className="form-control" value={description} onChange={e => setDescription(e.target.value)}/>
+
+                            <p className="text-left mt-4">Amount</p>
                             <input type="number" className="form-control"value={amount} onChange={e => setAmount(e.target.value)}/>
+
+                            <p className="text-left mt-4">Location</p>
+                            <input type="text" className="form-control" value={location} onChange={e => setLocation(e.target.value)}/>
                         </div>
 
 

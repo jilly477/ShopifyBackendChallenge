@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import EditItem from "./EditItem";
 
-const ListItems = () => {
+const ListItems = ({tableName}) => {
 
     const [items, setItems] = useState([]);
 
     //delete item function
     const deleteItem = async (id) => {
         try {
-            const deleteItem = await fetch(`http://localhost:5000/inventory/${id}`, {
+            const deleteItem = await fetch(`http://localhost:5000/${tableName}/${id}`, {
                 method: "DELETE"
             });
 
@@ -21,7 +21,7 @@ const ListItems = () => {
     const getItems = async() => {
         try {
 
-            const response = await fetch("http://localhost:5000/inventory")
+            const response = await fetch(`http://localhost:5000/${tableName}`)
             const jsonData = await response.json();
 
             setItems(jsonData);
@@ -42,6 +42,7 @@ const ListItems = () => {
                         <th>Item Name</th>
                         <th>Description</th>
                         <th>Amount</th>
+                        <th>Location</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
@@ -52,6 +53,7 @@ const ListItems = () => {
                             <td>{item.item_name}</td>
                             <td>{item.description}</td>
                             <td>{item.amount}</td>
+                            <td>{item.location}</td>
                             <td>
                                 <EditItem item={item} />
                             </td>
