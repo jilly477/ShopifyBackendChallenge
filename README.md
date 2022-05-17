@@ -21,6 +21,7 @@ node index
 ```bash
 cd ..
 cd client
+npm run build
 npm i
 npm start
 ```
